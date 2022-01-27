@@ -1,6 +1,7 @@
 package org.izag.csvreaderandconverter;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,42 +10,37 @@ import java.util.Optional;
 
 public class CsvReader {
 
-    private BufferedReader bufferedReader;
-    private SimpleEntityConverter simpleEnityConverter;
+    private SimpleEntityConverter simpleEntityConverter;
 
-    public CsvReader(String pathFile) {
-        try{
-            this.bufferedReader = new BufferedReader(new FileReader(pathFile));
-        }catch(IOException exc) {
-            System.err.println(exc.getMessage());
-            System.exit(0);
-        }
-        this.simpleEnityConverter = new SimpleEntityConverter();
+    public CsvReader(){
+
+        this.simpleEntityConverter = new SimpleEntityConverter();
     }
 
-    public List<SimpleEntity> readFromCsv() {
-        int rowNumber = 0;
+    public List<SimpleEntity> readFromCsv(String pathFile) {
+
+        List<SimpleEntity> simpleEntityList = new ArrayList<>();
         String row;
+        int rowNumber = 0;
         Optional<SimpleEntity> simpleEntityOptional;
-        List<SimpleEntity> simpleEntitiesList = new ArrayList<>();
-        try {
-            while ((row = bufferedReader.readLine()) != null) {
+
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(pathFile))){
+            while((row = bufferedReader.readLine()) != null) {
                 rowNumber++;
-                simpleEntityOptional = simpleEnityConverter.convertToSimpleEntity(row);
+                simpleEntityOptional = simpleEntityConverter.convertToSimpleEntity(row);
                 if(simpleEntityOptional.isPresent()) {
-                    simpleEntitiesList.add(simpleEntityOptional.get());
-                }
-                else {
-                    System.out.println("Row number " + rowNumber + " cannot be converted to required SimpleEntity object");
-                    if(rowNumber == 1) {
-                        System.out.println("That's header");
-                    }
+                   simpleEntityList.add(simpleEntityOptional.get());
+                } else {
+                   System.out.println("Row number " + rowNumber + " cannot be converted to required SimpleEntity object");
+                   if(rowNumber == 1) {
+                       System.out.println("That's header");
+                   }
                 }
             }
         } catch(IOException exc) {
             System.err.println(exc.getMessage());
             System.exit(0);
         }
-        return simpleEntitiesList;
+        return simpleEntityList;
     }
 }
