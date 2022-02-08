@@ -1,23 +1,21 @@
 package org.izag.csvreaderandconverter;
 
 import java.util.List;
-import java.util.ListIterator;
 
 public class SimpleEntityPrinter {
 
-    private SimpleEntityFormater simpleEnityFormater;
+    private SimpleEntityFormatter simpleEnityFormater;
+    private SimpleEntityFilter simpleEntityFilter;
 
-    public SimpleEntityPrinter(SimpleEntityFormater simpleEnityFormater) {
+    public SimpleEntityPrinter(SimpleEntityFormatter simpleEnityFormater, SimpleEntityFilter simpleEntityFilter) {
         this.simpleEnityFormater = simpleEnityFormater;
+        this.simpleEntityFilter = simpleEntityFilter;
     }
 
     public void printEntities(List<SimpleEntity> entityList) {
-        ListIterator<SimpleEntity> listIterator = entityList.listIterator();
-        while(listIterator.hasNext()) {
-            SimpleEntity simpleEntity = listIterator.next();
-            if(simpleEntity.getDate().getMonthValue() == 3) {
-                System.out.println(simpleEnityFormater.formatSimpleEntity(simpleEntity));
-            }
-        }
+        entityList.stream()
+                .filter(simpleEntity -> simpleEntityFilter.filterSimpleEntity(simpleEntity) == true)
+                .map(simpleEntity -> simpleEnityFormater.formatSimpleEntity(simpleEntity))
+                .forEach(System.out::println);
     }
 }
