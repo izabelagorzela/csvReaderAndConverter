@@ -4,11 +4,11 @@ import java.util.List;
 
 public class SimpleEntityPrinter {
 
-    private SimpleEntityFormatter simpleEnityFormater;
-    private SimpleEntityFilter simpleEntityFilter;
+    private Formatter simpleEnityFormater;
+    private Filter simpleEntityFilter;
 
-    public SimpleEntityPrinter(SimpleEntityFormatter simpleEnityFormater, SimpleEntityFilter simpleEntityFilter) {
-        this.simpleEnityFormater = simpleEnityFormater;
+    public SimpleEntityPrinter(Formatter simpleEntityFormatter, Filter simpleEntityFilter) {
+        this.simpleEnityFormater = simpleEntityFormatter;
         this.simpleEntityFilter = simpleEntityFilter;
     }
 

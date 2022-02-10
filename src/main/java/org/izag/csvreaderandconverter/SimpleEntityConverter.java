@@ -13,7 +13,7 @@ public class SimpleEntityConverter {
         try {
             simpleEntity = new SimpleEntity(Integer.valueOf(data[0]), data[1], LocalDate.parse(data[2], DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         } catch (NumberFormatException | DateTimeParseException exc) {
-            System.err.println("Conversion error");
+            System.err.println("Row conversion error: " + row);
         }
         return Optional.ofNullable(simpleEntity);
     }
