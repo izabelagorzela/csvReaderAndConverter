@@ -1,10 +1,12 @@
 package org.izag.csvreaderandconverter;
 
+import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+@Component
 public class SimpleEntityConverter {
 
     Optional<SimpleEntity> convertToSimpleEntity(String row) {

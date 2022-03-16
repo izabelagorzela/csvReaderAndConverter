@@ -1,5 +1,9 @@
 package org.izag.csvreaderandconverter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,10 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class CsvReader {
+
+    private static Logger LOG = LoggerFactory
+            .getLogger(CsvReader.class);
 
     private SimpleEntityConverter simpleEntityConverter;
 
+    @Autowired
     public CsvReader(SimpleEntityConverter simpleEntityConverter){
         this.simpleEntityConverter = simpleEntityConverter;
     }
@@ -27,7 +36,7 @@ public class CsvReader {
                 }
             }
         } catch(IOException exc) {
-            System.err.println(exc.getMessage());
+            LOG.error(exc.getMessage());
             System.exit(1);
         }
         return simpleEntityList;

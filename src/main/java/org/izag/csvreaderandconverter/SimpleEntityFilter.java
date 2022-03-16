@@ -1,5 +1,8 @@
 package org.izag.csvreaderandconverter;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SimpleEntityFilter implements Filter{
 
     @Override
