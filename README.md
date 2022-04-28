@@ -19,5 +19,5 @@ Print entities on the screen ensuring following rules:
 *Example directory contains csv file (input file).*
 *The file path is the first argument used to invoke the program.*
 
-**The version 1.0 (tag v1.0) is simple java application.**\
+**The version 1.0 (tag v1.0) is simple Java application.**\
 **The version 1.1 (tag v1.1) is Spring Boot console application.**
