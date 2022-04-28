@@ -14,8 +14,7 @@ import java.util.Optional;
 @Component
 public class CsvReader {
 
-    private static Logger LOG = LoggerFactory
-            .getLogger(CsvReader.class);
+    private static Logger LOG = LoggerFactory.getLogger(CsvReader.class);
 
     private SimpleEntityConverter simpleEntityConverter;
 

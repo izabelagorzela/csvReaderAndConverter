@@ -11,8 +11,7 @@ import static java.lang.System.exit;
 @Component
 public class RunClass implements CommandLineRunner{
 
-    private static Logger LOG = LoggerFactory
-            .getLogger(RunClass.class);
+    private static Logger LOG = LoggerFactory.getLogger(RunClass.class);
 
     private CsvReader csvReader;
     private SimpleEntityPrinter simpleEntityPrinter;
